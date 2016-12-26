@@ -24,6 +24,11 @@
           </div>
       </td>
       <td style="text-align:right">{{ item.volume|format_volume }}</td>
+      {% if item.volume != 0 %}
+        <td style="text-align:right">{{ (item.volume * item.quantity)|format_volume }}</td>
+      {% else %}
+        <td style="text-align:right">{{ item.volume|format_volume }}</td>
+      {% endif %}
       {% if item.prices.buy and item.prices.sell %}
         {% set representative_price = item.prices.sell.price or item.prices.buy.price %}
         <td style="text-align:right" data-sort="-{{ representative_price }}">
@@ -58,7 +63,8 @@
     <tr>
       <th class="header">Qty</th>
       <th class="header" style="width: 60%">Item</th>
-      <th class="header">Vol (m3)</th>
+      <th class="header">Single Vol&nbsp;(m3)</th>
+      <th class="header">Total Vol&nbsp;(m3)</th>
       <th class="header" style="text-align:right">Single&nbsp;(sell)<br />Single&nbsp;(buy)</th>
       <th class="header" style="text-align:right">Total&nbsp;(sell)<br />Total&nbsp;(buy)</th>
       <th class="header" style="text-align:right">ISK/m3&nbsp;(sell)<br />ISK/m3&nbsp;(buy)</th>
